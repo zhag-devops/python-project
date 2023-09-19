@@ -19,3 +19,17 @@ Here are a few reasons why you should include the `.lock` file in your version c
 So, it's generally a good practice to commit the `.lock` file along with your `pyproject.toml` (in the case of Poetry) or `Pipfile` and `Pipfile.lock` (in the case of Pipenv) to your version control system. This ensures that the dependencies for your project are well-documented and reproducible.
 
 
+#### Is it right that with docker multistage build docker can skip stages that doesn't required to get a stage with a CMD instruction?
+
+In Docker's multi-stage builds, Docker will indeed skip stages that are not required to produce the final image specified in the CMD or ENTRYPOINT instruction. Docker optimizes the build process by only building the stages that are needed to reach the target stage, which typically contains the final application or runtime environment.
+
+Here's how it works:
+
+Stages Execution: Docker builds stages sequentially, from top to bottom in the Dockerfile.
+Cache Reuse: Docker caches the intermediate images produced by each stage. If a stage has not changed (i.e., the build context and commands are the same), Docker will reuse the cached image from a previous build.
+Target Stage: The target stage is the final stage that will be used to run the containerized application. Typically, this stage includes the CMD or ENTRYPOINT instruction to specify how the container should start.
+Dependencies: If a stage depends on a previous stage (e.g., copying files or artifacts from a previous stage), Docker will automatically build the preceding stages in the correct order to satisfy the dependencies.
+Skipped Stages: Docker will skip building any stages that are not directly or indirectly needed to reach the target stage. This is determined based on the dependencies and changes in the Dockerfile and build context.
+In practice, this means that if you have a multi-stage Dockerfile with multiple stages, Docker will only execute and build the stages required to produce the final image specified in your CMD or ENTRYPOINT instruction. Stages that do not contribute to the final image, such as stages used for building dependencies or running tests, will be skipped if their cached images are up-to-date.
+
+This optimization helps reduce build times and the size of the final Docker image, as unnecessary stages are not included. However, it's important to design your Dockerfile carefully to ensure that the necessary dependencies are properly copied or included in the target stage so that your application can run successfully.
