@@ -1,4 +1,5 @@
 def start():
+    '''Function print Hello world'''
     print('Hello world!')
 
 
