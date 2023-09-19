@@ -9,6 +9,9 @@ __pycache__/
 .env
 .venv
 
+# Tests
+.pytest_cache/
+
 # Distribution / packaging
 .Python
 build/
