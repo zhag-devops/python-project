@@ -5,7 +5,7 @@ DOCKER_IMAGE := python-project
 .PHONY: help
 help:
 	@echo "Available targets:"
-	@echo "  ci         - Run lint, test, build"
+	@echo "  ci         - Run lint, test, build,run"
 	@echo "  lint       - Run linting checks"
 	@echo "  test       - Run unit tests"
 	@echo "  build      - Build the Docker image"
