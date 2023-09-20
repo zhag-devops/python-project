@@ -6,7 +6,9 @@ This is an example of what a Python project might look like.
 
 Requirements: python3 and Docker.
 
-To initialize the local development environment, simply run "make install". You can also run "make ci" to execute the code within a Docker container.
+To initialize the local development environment, simply run "make install". 
+Don`t forget to activate virtual environment by run "source .venv/bin/activate"
+You can also run "make ci" to execute the code within a Docker container.
 
 ## Project Details
 
