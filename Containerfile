@@ -28,7 +28,8 @@ FROM development-environment as lint
 COPY tests tests/
 COPY src/ run.py ./
 
-RUN poetry run python -m flake8
+RUN poetry run python -m flake8 &&\
+    poetry run python -m mypy -m run
 
 # STAGE 5: Running tests
 FROM development-environment as test
