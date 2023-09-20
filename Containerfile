@@ -23,6 +23,8 @@ RUN poetry run python -m pytest
 # STAGE 3: Build prod image
 FROM base as app
 
+ENV APP_LOG_LEVEL=ERROR
+
 RUN poetry env use system && \
     poetry check && \
     poetry install --only main --no-interaction --no-cache
