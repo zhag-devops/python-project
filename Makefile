@@ -10,6 +10,7 @@ help:
 	@echo "  test       - Run unit tests"
 	@echo "  build      - Build the Docker image"
 	@echo "  run        - Run the Docker container"
+	@echo "  install    - Install in dev environment"
 	@echo "  help       - Display this help message"
 
 # Lint target
@@ -35,3 +36,15 @@ run:
 # CI target
 .PHONY: ci
 ci: lint test build run
+
+.PHONY: install
+install:
+	@read -p "Do you want to install? (Y/N): " choice; \
+	if [ "$$choice" = "Y" ]; then \
+		python3 -m venv .venv && \
+		. .venv/bin/activate && \
+		pip3 install -r requirements.txt && \
+		poetry install; \
+	else \
+		echo "Installation aborted."; \
+	fi

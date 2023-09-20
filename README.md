@@ -1,50 +1,21 @@
-# Python project example
+# Python Project Example
 
-## Project initialization 
+This is an example of what a Python project might look like.
 
-> Basic python project structure 
+## Quick Start
 
-### Create virtual environment
+Requirements: python3 and Docker.
 
-```
-python -m venv .venv
-source .venv/bin/activate
-```
+To initialize the local development environment, simply run "make install". You can also run "make ci" to execute the code within a Docker container.
 
-> Don`t forget to select python interpreter in VSC by pressing Shift+CMD+P and typing "Python: Select Interpreter". Chose .venv
+## Project Details
 
+This project is built using the following tools and libraries:
 
-### Install requirements
-
-```
-pip install -r requirements.txt
-```
-
-### Install dependencies with Poentry
-
-> Check if Poentry see Virtualenv?
-```
-poetry env info
-```
-
-```
-Virtualenv
-Python:         3.11.5
-Implementation: CPython
-Path:           /Users/user/Documents/GitHub/python-project/.venv
-Executable:     /Users/user/Documents/GitHub/python-project/.venv/bin/python
-Valid:          True
-
-System
-Platform:   darwin
-OS:         posix
-Python:     3.11.5
-Path:       /Library/Frameworks/Python.framework/Versions/3.11
-Executable: /Library/Frameworks/Python.framework/Versions/3.11/bin/python3.11
-```
-
-> Install dependencies
-
-```
-poetry install
-```
+Build with:
+    - [poetry](https://python-poetry.org)
+    - [flake8](https://flake8.pycqa.org/en/latest/)
+    - [mypy](https://mypy-lang.org/)
+    - [pytest](https://docs.pytest.org/en/7.4.x/)
+    - [python-json-logger](https://pypi.org/project/python-json-logger/)
+    - [docker](https://docs.docker.com/)
