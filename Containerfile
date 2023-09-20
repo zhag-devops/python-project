@@ -6,12 +6,12 @@ RUN pip install -r requirements.txt
 
 WORKDIR /app
 COPY pyproject.toml poetry.lock README.md ./
+COPY run.py src ./
 
 # STAGE 2: Running tests
 FROM base as test
 
 # Copy only the files needed for tests
-COPY run.py src ./
 COPY tests tests/
 
 RUN poetry env use system && \
@@ -22,6 +22,8 @@ RUN poetry run python -m pytest
 
 # STAGE 3: Build prod image
 FROM base as app
+
+ENV APP_LOG_LEVEL=ERROR
 
 RUN poetry env use system && \
     poetry check && \
