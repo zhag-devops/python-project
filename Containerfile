@@ -40,7 +40,7 @@ COPY src/ run.py ./
 RUN poetry run python -m pytest
 
 # STAGE 6: Build prod image
-FROM runtime-environment as app
+FROM runtime-environment as build
 
 ENV APP_LOG_LEVEL=ERROR
 

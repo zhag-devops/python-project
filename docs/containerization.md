@@ -6,7 +6,7 @@
 
 > docker build --target lint -f Containerfile .
 > docker build --target test -f Containerfile .
-> docker build --target app -t python-project -f Containerfile .
+> docker build --target build -t python-project -f Containerfile .
 
 > Use "--no-cache" flag to invalidate docker cache
 
