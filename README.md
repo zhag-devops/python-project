@@ -18,6 +18,10 @@ Add a package to dev environment
 Add package to prod environment
 > poetry add package_name
 
+## Pre-commit settings
+
+You can install pre-commit by running 'make pre-commit'. The decigion of using pre-commit is up to you!
+
 ## Project Details
 
 This project is built using the following tools and libraries:
