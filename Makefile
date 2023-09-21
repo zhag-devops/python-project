@@ -48,3 +48,14 @@ install:
 	else \
 		echo "Installation aborted."; \
 	fi
+
+.PHONY: pre-commit
+pre-commit:
+	@read -p "Do you want to activate pre-commit? (Y/N): " choice; \
+	if [ "$$choice" = "Y" ]; then \
+		python3 -m venv .venv && \
+		. .venv/bin/activate && \
+		pre-commit install --hook-type pre-commit --hook-type pre-push; \
+	else \
+		echo "Installation aborted."; \
+	fi
