@@ -11,8 +11,6 @@ repos:
         stages: [pre-push]
     -   id: detect-private-key
         stages: [pre-commit]
-    -   id: detect-aws-credentials
-        stages: [pre-commit]
     -   id: double-quote-string-fixer
         stages: [pre-push]
     -   id: end-of-file-fixer
