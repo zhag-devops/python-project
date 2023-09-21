@@ -11,6 +11,7 @@ help:
 	@echo "  build      - Build the Docker image"
 	@echo "  run        - Run the Docker container"
 	@echo "  install    - Install in dev environment"
+	@echo "  pre-commit - Activate pre-commit"
 	@echo "  help       - Display this help message"
 
 # Lint target
