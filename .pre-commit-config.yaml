@@ -1,4 +1,4 @@
-default_install_hook_types: [pre-push]
+default_install_hook_types: [pre-commit, pre-push]
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.3.0
@@ -10,9 +10,9 @@ repos:
     -   id: check-toml
         stages: [pre-push]
     -   id: detect-private-key
-        stages: [commit]
+        stages: [pre-commit]
     -   id: detect-aws-credentials
-        stages: [commit]
+        stages: [pre-commit]
     -   id: double-quote-string-fixer
         stages: [pre-push]
     -   id: end-of-file-fixer
