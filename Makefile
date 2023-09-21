@@ -11,6 +11,7 @@ help:
 	@echo "  build      - Build the Docker image"
 	@echo "  run        - Run the Docker container"
 	@echo "  install    - Install in dev environment"
+	@echo "  clean      - Delete __pycache__ and etc"
 	@echo "  pre-commit - Activate pre-commit"
 	@echo "  help       - Display this help message"
 
@@ -32,7 +33,13 @@ build:
 # Run target
 .PHONY: run
 run:
-	docker run $(DOCKER_IMAGE)
+	@if [ -f .env ]; then \
+		echo "Running Docker with .env file..."; \
+		docker run --env-file .env $(DOCKER_IMAGE); \
+	else \
+		echo "Running Docker without .env file..."; \
+		docker run $(DOCKER_IMAGE); \
+	fi
 
 # CI target
 .PHONY: ci
@@ -49,6 +56,14 @@ install:
 	else \
 		echo "Installation aborted."; \
 	fi
+
+.PHONY: clean
+clean:
+	@echo "Cleaning up __pycache__ folders..."
+	find . -name "__pycache__" -type d -exec rm -r {} +
+	find . -name ".mypy_cache" -type d -exec rm -r {} +
+	@echo "Cleanup complete."
+
 
 .PHONY: pre-commit
 pre-commit:
