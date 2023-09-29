@@ -1,5 +1,5 @@
 # Docker image name and tag
-DOCKER_IMAGE := python-project
+DOCKER_IMAGE := vnd-converter-bot
 
 # Define default target
 .PHONY: help
@@ -23,12 +23,12 @@ lint:
 # Test target
 .PHONY: test
 test:
-	docker build --target test -f Containerfile .
+	docker build --no-cache --target test -f Containerfile .
 
 # Build target
 .PHONY: build
 build:
-	docker build --target build -t $(DOCKER_IMAGE) -f Containerfile .
+	docker build --no-cache --target build -t $(DOCKER_IMAGE) -f Containerfile .
 
 # Run target
 .PHONY: run
@@ -41,7 +41,6 @@ run:
 		docker run $(DOCKER_IMAGE); \
 	fi
 
-# CI target
 .PHONY: ci
 ci: lint test build run
 
@@ -62,6 +61,7 @@ clean:
 	@echo "Cleaning up __pycache__ folders..."
 	find . -name "__pycache__" -type d -exec rm -r {} +
 	find . -name ".mypy_cache" -type d -exec rm -r {} +
+	find . -name ".pytest_cache" -type d -exec rm -r {} +
 	@echo "Cleanup complete."
 
 
@@ -75,3 +75,11 @@ pre-commit:
 	else \
 		echo "Installation aborted."; \
 	fi
+
+.PHONY: black
+black:
+	black .
+
+.PHONY: check
+check:
+	black --check .
