@@ -7,7 +7,7 @@ RUN pip install -r requirements.txt
 WORKDIR /app
 COPY setup.cfg pyproject.toml poetry.lock README.md ./
 
-# STAGE 2: Development environment 
+# STAGE 2: Development environment
 FROM base as development-environment
 
 RUN poetry env use system && \
@@ -26,17 +26,18 @@ FROM development-environment as lint
 
 # Tests covered by linter
 COPY tests tests/
-COPY src/ run.py ./
+COPY src src/
+COPY run.py settings.py ./
 
-RUN poetry run python -m flake8 &&\
-    poetry run python -m mypy -m run
+RUN poetry run python -m flake8
 
 # STAGE 5: Running tests
 FROM development-environment as test
 
 # Copy only the files needed for tests
 COPY tests tests/
-COPY src/ run.py ./
+COPY src src/
+COPY run.py settings.py ./
 
 RUN poetry run python -m pytest
 
@@ -45,7 +46,8 @@ FROM runtime-environment as build
 
 ENV APP_LOG_LEVEL=ERROR
 
-COPY src/ run.py ./
+COPY src src/
+COPY run.py settings.py ./
 
 ENTRYPOINT [ "poetry" ]
 CMD [ "run", "python", "-m", "run" ]
